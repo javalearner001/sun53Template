@@ -1,8 +1,6 @@
 package com.sun.dao;
 
-import com.sun.pojo.Category;
-import com.sun.pojo.PageBean;
-import com.sun.pojo.Product;
+import com.sun.pojo.*;
 
 import java.util.List;
 
@@ -18,4 +16,8 @@ public interface ProductDao {
     List<Product> findProductByPage(PageBean pageBean);
 
     Product findProductByPid(String pid);
+
+    void addOrders(Order order);
+
+    void addOrderItem(OrderItem orderItem);
 }

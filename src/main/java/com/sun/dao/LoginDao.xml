@@ -7,4 +7,5 @@
         from `user`
         WHERE username=#{username}
     </select>
+
 </mapper>

@@ -11,7 +11,7 @@ import java.util.UUID;
  **/
 public class CommonUtils {
     //生成uid方法
-    public static String getUid(){
+    public static String getUUid(){
         return UUID.randomUUID().toString();
     }
 }

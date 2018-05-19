@@ -7,6 +7,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
+
 /**
  * @ClassName LoginServiceImpl
  * @Description TODO
@@ -28,5 +30,11 @@ public class LoginServiceImpl implements LoginService {
         }
 
         return null;
+    }
+
+    @Override
+    public User login(String username, String password) throws SQLException {
+        User user=loginDao.login(username,password);
+        return user;
     }
 }

@@ -32,4 +32,34 @@
         FROM product
         WHERE pid=#{pid}
     </select>
+    <insert id="addOrders" parameterType="com.sun.pojo.Order">
+        insert into
+        orders(
+        oid,ordertime,total,state,address,name,telephone,uid
+        )
+        values (
+        #{oid},
+        #{ordertime},
+        #{total},
+        #{state},
+        #{address},
+        #{name},
+        #{telephone},
+        #{user.uid}
+        )
+    </insert>
+    <insert id="addOrderItem" parameterType="com.sun.pojo.OrderItem">
+        insert into
+        orderitem(
+        itemid,count,subtotal,pid,oid
+        )
+        values(
+          #{itemid},
+          #{count},
+          #{subtotal},
+          #{product.pid},
+          #{order.oid}
+        )
+    </insert>
+
 </mapper>

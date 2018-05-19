@@ -1,12 +1,9 @@
 package com.sun.service.Impl;
 
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.sun.dao.ProductDao;
-import com.sun.pojo.Category;
-import com.sun.pojo.PageBean;
-import com.sun.pojo.Product;
+import com.sun.pojo.*;
 import com.sun.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -80,5 +77,18 @@ public class ProductServiceImpl implements ProductService {
         pageBean.setTotalPage(totalPage);
 
         return pageBean;
+    }
+
+    @Override
+    public void submitOrder(Order order) {
+        try{
+            productDao.addOrders(order);
+            for(OrderItem item:order.getOrderItems()){
+                productDao.addOrderItem(item);
+            }
+//            productDao.addOrderItem(order.getOrderItems());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

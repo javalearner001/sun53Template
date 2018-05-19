@@ -1,6 +1,5 @@
 package com.sun.controller;
 
-import com.sun.pojo.Category;
 import com.sun.pojo.Product;
 import com.sun.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;

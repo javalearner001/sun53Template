@@ -1,6 +1,5 @@
 package com.sun.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.pojo.Category;
 import com.sun.service.ProductService;
