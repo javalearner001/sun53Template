@@ -91,4 +91,11 @@ public class ProductServiceImpl implements ProductService {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void updateOrderAdrr(Order order) {
+        productDao.updateOrderAdrr(order);
+    }
+
+
 }

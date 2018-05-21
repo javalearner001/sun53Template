@@ -24,6 +24,24 @@
 	</style>
 
 	<script type="text/javascript">
+        function Check(){
+            if ( document.getElementById("name").value=="")
+            {
+                alert('请输入用户名!');
+                return false;
+            }
+            if ( document.getElementById("address").value=="")
+            {
+                alert('请输入地址!');
+                return false;
+            }
+            if ( document.getElementById("telephone").value=="")
+            {
+                alert('请输入电话号码!');
+                return false;
+            }
+            return true;
+        }
         function confirmOrder(){
             //提交表单
             $("#orderForm").submit();
@@ -83,31 +101,31 @@
 
 	<div>
 		<hr />
-		<form id="orderForm" class="form-horizontal" action="${pageContext.request.contextPath }/product" method="post"
+		<form id="orderForm" class="form-horizontal" action="${pageContext.request.contextPath }/confirmOrder" method="post"
 			  style="margin-top: 5px; margin-left: 150px;">
 			<!-- method的名字 通过表单提交 -->
-			<input type="hidden" name="method" value="confirmOrder">
+	<%--		<input type="hidden" name="method" value="confirmOrder">--%>
 			<!-- 传递订单oid -->
 			<input type="hidden" name="oid" value="${order.oid }">
 
 
 			<div class="form-group">
-				<label for="username" class="col-sm-1 control-label">地址</label>
+				<label for="address" class="col-sm-1 control-label">地址</label>
 				<div class="col-sm-5">
 					<input type="text" class="form-control" id="address" name="address"  value="">
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="inputPassword3" class="col-sm-1 control-label">收货人</label>
+				<label for="name" class="col-sm-1 control-label">收货人</label>
 				<div class="col-sm-5">
-					<input type="text" class="form-control" id="inputPassword3" name="name"
+					<input type="text" class="form-control" id="name" name="name"
 						   placeholder="请输收货人" value="${user.name }">
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="confirmpwd" class="col-sm-1 control-label">电话</label>
+				<label for="telephone" class="col-sm-1 control-label">电话</label>
 				<div class="col-sm-5">
-					<input type="text" class="form-control" id="confirmpwd" name="telephone"
+					<input type="text" class="form-control" id="telephone" name="telephone"
 						   placeholder="请输入联系方式"  value="${user.telephone }">
 				</div>
 			</div>

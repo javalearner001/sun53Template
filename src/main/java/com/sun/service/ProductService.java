@@ -22,4 +22,6 @@ public interface ProductService {
 
     //提交订单，将订单数据和订单项数据存储到数据库中
     public void submitOrder(Order order);
+
+    public void updateOrderAdrr(Order order);
 }

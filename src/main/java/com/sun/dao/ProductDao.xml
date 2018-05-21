@@ -61,5 +61,14 @@
           #{order.oid}
         )
     </insert>
+    <update id="updateOrderAdrr" parameterType="com.sun.pojo.Order">
+        UPDATE orders
+        SET
+        address=#{address},
+        name=#{name},
+        telephone=#{telephone},
+        state=#{state}
+        WHERE oid=#{oid}
+    </update>
 
 </mapper>

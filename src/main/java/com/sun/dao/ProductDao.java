@@ -20,4 +20,6 @@ public interface ProductDao {
     void addOrders(Order order);
 
     void addOrderItem(OrderItem orderItem);
+
+    void updateOrderAdrr(Order order);
 }
