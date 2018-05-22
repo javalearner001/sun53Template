@@ -29,19 +29,19 @@
 					<!-- 轮播图的轮播图片 -->
 					<div class="carousel-inner" role="listbox">
 						<div class="item active">
-							<img src="img/1.jpg">
+							<img src="img/001.jpg">
 							<div class="carousel-caption">
 								<!-- 轮播图上的文字 -->
 							</div>
 						</div>
 						<div class="item">
-							<img src="img/2.jpg">
+							<img src="img/002.jpg">
 							<div class="carousel-caption">
 								<!-- 轮播图上的文字 -->
 							</div>
 						</div>
 						<div class="item">
-							<img src="img/3.jpg">
+							<img src="img/003.jpg">
 							<div class="carousel-caption">
 								<!-- 轮播图上的文字 -->
 							</div>

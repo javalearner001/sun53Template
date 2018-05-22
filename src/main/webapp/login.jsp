@@ -43,7 +43,7 @@
 
 
 <div class="container"
-	 style="width: 100%; height: 460px; background: #FF2C4C url('images/loginbg.jpg') no-repeat;">
+	 style="margin-left:20px; width: 100%; height: 460px; background: #fff9fb url('images/loginbg.png') no-repeat;">
 	<div class="row">
 		<div class="col-md-7">
 			<!--<img src="./image/login.jpg" width="500" height="330" alt="会员登录" title="会员登录">-->

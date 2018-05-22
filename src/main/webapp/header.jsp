@@ -18,10 +18,11 @@
 			</c:if>
 			<c:if test="${!empty user }">
 				<li style="color:red">欢迎您，${user.username }</li>
+				<li><a href="${pageContext.request.contextPath}/logout">退出登录</a></li>
 			</c:if>
 
 			<li><a href="cart.jsp">购物车</a></li>
-			<li><a href="order_list.jsp">我的订单</a></li>
+			<li><a href="${pageContext.request.contextPath}/myOrders">我的订单</a></li>
 		</ol>
 	</div>
 </div>
@@ -39,7 +40,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">首页</a>
+				<a class="navbar-brand" href="${pageContext.request.contextPath}/default.jsp">首页</a>
 			</div>
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

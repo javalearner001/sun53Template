@@ -6,6 +6,7 @@ import com.sun.pojo.PageBean;
 import com.sun.pojo.Product;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ProductService {
     //获得热门商品
@@ -24,4 +25,8 @@ public interface ProductService {
     public void submitOrder(Order order);
 
     public void updateOrderAdrr(Order order);
+
+    public List<Order> findAllOrders(String uid);
+
+    public List<Map<String ,Object>> findAllOrderItemByOid(String oid);
 }

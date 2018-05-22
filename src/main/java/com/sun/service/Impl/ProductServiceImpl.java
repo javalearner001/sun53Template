@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @ClassName ProductServiceImpl
@@ -95,6 +96,18 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void updateOrderAdrr(Order order) {
         productDao.updateOrderAdrr(order);
+    }
+
+    @Override
+    public List<Order> findAllOrders(String uid) {
+        List<Order> orderList=productDao.findAllOrders(uid);
+        return orderList;
+    }
+
+    @Override
+    public List<Map<String, Object>> findAllOrderItemByOid(String oid) {
+        List<Map<String, Object>> orderItemList=productDao.findAllOrderItemByOid(oid);
+        return orderItemList;
     }
 
 

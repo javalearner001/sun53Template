@@ -75,4 +75,23 @@ public class LoginController {
         }
     }
 
+    //退出登录
+    @RequestMapping("/logout")
+    public void logout(HttpServletResponse response,HttpServletRequest request){
+        try{
+            HttpSession session=request.getSession();
+            session.removeAttribute("user");
+
+            //将存储在客户端的cookie删除
+            Cookie cookie_username=new Cookie("cookie_username","");
+            cookie_username.setMaxAge(0);
+            Cookie cookie_password=new Cookie("cookie_password","");
+            cookie_password.setMaxAge(0);
+            response.addCookie(cookie_password);
+            response.addCookie(cookie_username);
+            response.sendRedirect(request.getContextPath()+"/login.jsp");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 }
