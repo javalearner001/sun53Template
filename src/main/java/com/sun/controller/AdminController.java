@@ -6,6 +6,8 @@ import com.sun.pojo.PictureResult;
 import com.sun.pojo.Product;
 import com.sun.service.AdminService;
 import com.sun.service.PictureService;
+import com.sun.service.ProductService;
+import com.sun.utils.IDUtils;
 import org.apache.commons.net.ftp.FTPClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,6 +38,9 @@ public class AdminController {
     @Autowired
     private PictureService pictureService;
 
+    @Autowired
+    private ProductService productService;
+
     /**
      * 后台获取商品类别
      * @param request
@@ -64,26 +69,40 @@ public class AdminController {
     public void addProduct(MultipartFile upload, HttpServletResponse response, HttpServletRequest request){
         try {
             InputStream inputStream=upload.getInputStream();
+            String pname=request.getParameter("pname");
+            String is_hot=request.getParameter("is_hot");
+            String market_price=request.getParameter("market_price");
+            String shop_price=request.getParameter("shop_price");
+            String cid=request.getParameter("cid");
+            String pdesc=request.getParameter("pdesc");
+            String path=null;// 文件路径
+            String type=null;// 文件类型
+            String fileName=upload.getOriginalFilename();// 文件原名称
+            // 自定义的文件名称
+            String trueFileName=String.valueOf(System.currentTimeMillis())+fileName;
+            // 设置存放图片文件的路径
+            String realPath="E:\\test59\\sun59Template\\src\\main\\webapp\\products\\getUpload\\";
+//            E:\test59\sun59Template\src\main\webapp\products\getUpload
+            path=realPath+/*System.getProperty("file.separator")+*/trueFileName;
+            System.out.println("存放图片文件的路径:"+path);
+            // 转存文件到指定的路径
+            upload.transferTo(new File(path));
+            //存到数据库的图片路径
+            String DBPath=null;
 
-            PictureResult result=pictureService.uploadPicture(upload);
-            /*//创建一个Ftp对象
-            FTPClient ftpClient=new FTPClient();
-            //创建连接，端口
-            ftpClient.connect("120.79.59.251",21);
-            //设置用户名，密码
-            ftpClient.login("ftpuser","456123z");
-            //3、读取本地文件
-            FileInputStream inputStream = new FileInputStream(new File("D:\\testUpload\\1.jpg"));
-            //4、上传文件
-            //1）指定上传目录
-            ftpClient.changeWorkingDirectory("/home/ftpuser/www/images");
-            //2）指定文件类型
-            ftpClient.setFileType(FTPClient.BINARY_FILE_TYPE);
-            //第一个参数：文件在远程服务器的名称
-            //第二个参数：文件流
-            ftpClient.storeFile("hello.jpg", inputStream);
-            //5、退出登录
-            ftpClient.logout();*/
+            //将商品添加到商品表中
+            Product product=new Product();
+            product.setPid(IDUtils.genImageName());
+            product.setShop_price(Double.parseDouble(shop_price));
+            product.setPname(pname);
+            product.setIs_hot(Integer.parseInt(is_hot));
+            product.setPdesc(pdesc);
+            product.setMarket_price(Double.parseDouble(market_price));
+            Category category=new Category();
+            category.setCid(cid);
+            product.setCategory(category);
+            product.setPimage(path);
+            productService.addProduct(product);
 
         } catch (Exception e) {
             e.printStackTrace();

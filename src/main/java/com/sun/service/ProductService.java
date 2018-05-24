@@ -29,4 +29,6 @@ public interface ProductService {
     public List<Order> findAllOrders(String uid);
 
     public List<Map<String ,Object>> findAllOrderItemByOid(String oid);
+
+    public void addProduct(Product product);
 }

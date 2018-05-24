@@ -75,5 +75,11 @@
         from orderitem o,product p
         WHERE o.pid=p.pid AND o.oid=#{oid}
     </select>
-
+    <insert id="addProduct" parameterType="com.sun.pojo.Product">
+        INSERT INTO product(
+          pid,pname,market_price,shop_price,pimage,is_hot,pdesc,cid
+        )VALUES (
+         #{pid},#{pname},#{market_price},#{shop_price},#{pimage},#{is_hot},#{pdesc},#{category.cid}
+        )
+    </insert>
 </mapper>

@@ -110,5 +110,10 @@ public class ProductServiceImpl implements ProductService {
         return orderItemList;
     }
 
+    @Override
+    public void addProduct(Product product) {
+        productDao.addProduct(product);
+    }
+
 
 }

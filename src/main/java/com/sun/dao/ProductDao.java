@@ -32,4 +32,6 @@ public interface ProductDao {
     List<Order> findAllOrders(@Param("uid") String uid);
 
     List<Map<String, Object>> findAllOrderItemByOid(String oid);
+
+    void addProduct(Product product);
 }
