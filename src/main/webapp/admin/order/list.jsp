@@ -34,7 +34,7 @@
 
             //ajax异步访问数据
             $.post(
-                "${pageContext.request.contextPath }/admin?method=findOrderInfoByOid",
+                "${pageContext.request.contextPath }/admin/getOrderInfo",
                 {"oid":oid},
                 function(data){
 
@@ -49,7 +49,7 @@
                     for(var i=0;i<data.length;i++){
                         content+="<tr style='text-align: center;'>"+
                             "<td>"+
-                            "<img src='${pageContext.request.contextPath }/"+data[i].pimage+"' width='70' height='60'>"+
+                            "<img src='"+data[i].pimage+"' width='70' height='60'>"+
                             "</td>"+
                             "<td><a target='_blank'>"+data[i].pname+"</a></td>"+
                             "<td>￥"+data[i].shop_price+"</td>"+

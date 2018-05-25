@@ -1,15 +1,16 @@
 package com.sun.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.pojo.Category;
-import com.sun.pojo.PictureResult;
-import com.sun.pojo.Product;
+import com.sun.pojo.*;
 import com.sun.service.AdminService;
 import com.sun.service.PictureService;
 import com.sun.service.ProductService;
+import com.sun.utils.FtpUtil;
 import com.sun.utils.IDUtils;
 import org.apache.commons.net.ftp.FTPClient;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
@@ -68,47 +69,60 @@ public class AdminController {
     @RequestMapping("/addProduct")
     public void addProduct(MultipartFile upload, HttpServletResponse response, HttpServletRequest request){
         try {
-            InputStream inputStream=upload.getInputStream();
-            String pname=request.getParameter("pname");
-            String is_hot=request.getParameter("is_hot");
-            String market_price=request.getParameter("market_price");
-            String shop_price=request.getParameter("shop_price");
-            String cid=request.getParameter("cid");
-            String pdesc=request.getParameter("pdesc");
-            String path=null;// 文件路径
-            String type=null;// 文件类型
-            String fileName=upload.getOriginalFilename();// 文件原名称
-            // 自定义的文件名称
-            String trueFileName=String.valueOf(System.currentTimeMillis())+fileName;
-            // 设置存放图片文件的路径
-            String realPath="E:\\test59\\sun59Template\\src\\main\\webapp\\products\\getUpload\\";
-//            E:\test59\sun59Template\src\main\webapp\products\getUpload
-            path=realPath+/*System.getProperty("file.separator")+*/trueFileName;
-            System.out.println("存放图片文件的路径:"+path);
-            // 转存文件到指定的路径
-            upload.transferTo(new File(path));
-            //存到数据库的图片路径
-            String DBPath=null;
+           PictureResult pictureResult=pictureService.uploadPicture(upload);
+            //创建一个Ftp对象
+//            FTPClient ftpClient=new FTPClient();
+//            System.out.println(FTP_ADDRESS);
+//            //创建连接，端口
+//            ftpClient.connect(FTP_ADDRESS,FTP_PORT);
+//            //设置用户名，密码
+//            ftpClient.login(FTP_USERNAME,FTP_PASSWORD);
+//            int replyCode = ftpClient.getReplyCode(); //是否成功登录服务器
+            //取原始文件名
 
-            //将商品添加到商品表中
-            Product product=new Product();
-            product.setPid(IDUtils.genImageName());
-            product.setShop_price(Double.parseDouble(shop_price));
-            product.setPname(pname);
-            product.setIs_hot(Integer.parseInt(is_hot));
-            product.setPdesc(pdesc);
-            product.setMarket_price(Double.parseDouble(market_price));
-            Category category=new Category();
-            category.setCid(cid);
-            product.setCategory(category);
-            product.setPimage(path);
-            productService.addProduct(product);
-
+            //4、上传文件
+            //1）指定上传目录
+//            ftpClient.enterLocalActiveMode();
+//            ftpClient.changeWorkingDirectory(FTP_BASE_PATH);
+//            //2）指定文件类型
+//            ftpClient.setFileType(FTPClient.BINARY_FILE_TYPE);
+//            //第一个参数：文件在远程服务器的名称
+//            //第二个参数：文件流
+//            ftpClient.storeFile("hello2.jpg", inputStream);
+//            inputStream.close();
+//            //5、退出登录
+//            ftpClient.logout();
+            productService.addProduct(request,pictureResult);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    @RequestMapping("/orderList")
+    public void getOrderList(HttpServletResponse response, HttpServletRequest request){
+        try {
+            //获得所以订单 List<order>
+            List<Order> orderList=adminService.getOrderList();
 
+            request.setAttribute("orderList",orderList);
+            request.getRequestDispatcher("/admin/order/list.jsp").forward(request,response);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
+    @RequestMapping("/getOrderInfo")
+    public void getOrderInfo(HttpServletResponse response, HttpServletRequest request){
+        try{
+            //获得oid
+            String oid=request.getParameter("oid");
+            List<Map<String,Object>> mapList=adminService.getOrderInfo(oid);
+            ObjectMapper mapper=new ObjectMapper();
+            String mapListJson=mapper.writeValueAsString(mapList);
+            response.setContentType("text/html;charset=UTF-8");
+            response.getWriter().write(mapListJson);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 }

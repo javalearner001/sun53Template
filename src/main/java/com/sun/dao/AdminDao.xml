@@ -2,5 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.sun.dao.AdminDao">
+    <select id="getOrderList" resultType="com.sun.pojo.Order">
+        SELECT *
+        FROM orders
+        ORDER BY ordertime DESC
+    </select>
 
 </mapper>

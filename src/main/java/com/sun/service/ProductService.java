@@ -1,10 +1,8 @@
 package com.sun.service;
 
-import com.sun.pojo.Category;
-import com.sun.pojo.Order;
-import com.sun.pojo.PageBean;
-import com.sun.pojo.Product;
+import com.sun.pojo.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -30,5 +28,5 @@ public interface ProductService {
 
     public List<Map<String ,Object>> findAllOrderItemByOid(String oid);
 
-    public void addProduct(Product product);
+    public void addProduct(HttpServletRequest request, PictureResult pictureResult);
 }

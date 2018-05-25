@@ -5,9 +5,12 @@ import com.github.pagehelper.PageInfo;
 import com.sun.dao.ProductDao;
 import com.sun.pojo.*;
 import com.sun.service.ProductService;
+import com.sun.utils.IDUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -111,7 +114,27 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void addProduct(Product product) {
+    public void addProduct(HttpServletRequest request,PictureResult pictureResult) {
+        String pname=request.getParameter("pname");
+        String is_hot=request.getParameter("is_hot");
+        String market_price=request.getParameter("market_price");
+        String shop_price=request.getParameter("shop_price");
+        String cid=request.getParameter("cid");
+        String pdesc=request.getParameter("pdesc");
+        //将商品添加到商品表中
+        Product product=new Product();
+        product.setPid(IDUtils.genImageName());
+        product.setShop_price(Double.parseDouble(shop_price));
+        product.setPname(pname);
+        product.setIs_hot(Integer.parseInt(is_hot));
+        product.setPdesc(pdesc);
+        product.setMarket_price(Double.parseDouble(market_price));
+        Category category=new Category();
+        category.setCid(cid);
+        product.setCategory(category);
+        product.setPimage(pictureResult.getUrl());
+        product.setPflag(0);
+        product.setPdate(new Date());
         productDao.addProduct(product);
     }
 

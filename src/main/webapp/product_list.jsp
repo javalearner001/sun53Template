@@ -44,7 +44,7 @@
 
 		<div class="col-md-3" style="height:250px">
 			<a href="${pageContext.request.contextPath }/productInfo?pid=${pro.pid}&cid=${cid}&currentPage=${pageBean.currentPage}">
-				<img src="${pageContext.request.contextPath }/${pro.pimage}" width="170" height="170" style="display: inline-block;">
+				<img src="${pro.pimage}" width="170" height="170" style="display: inline-block;">
 			</a>
 			<p>
 				<a href="${pageContext.request.contextPath }/productInfo?pid=${pro.pid}&cid=${cid}&currentPage=${pageBean.currentPage}" style='color: green'>${pro.pname }</a>

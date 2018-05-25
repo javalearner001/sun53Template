@@ -6,11 +6,12 @@
         SELECT *
         FROM product
         WHERE is_hot=1
+        ORDER BY market_price DESC LIMIT 0,9
     </select>
     <select id="findNewProductList" resultType="com.sun.pojo.Product">
         SELECT *
         FROM product
-        order BY pdate
+        order BY pdate DESC LIMIT 0,10
     </select>
     <select id="findAllCategory" resultType="com.sun.pojo.Category">
         SELECT *
@@ -77,9 +78,9 @@
     </select>
     <insert id="addProduct" parameterType="com.sun.pojo.Product">
         INSERT INTO product(
-          pid,pname,market_price,shop_price,pimage,is_hot,pdesc,cid
+          pid,pname,market_price,shop_price,pimage,is_hot,pdesc,cid,pdate,pflag
         )VALUES (
-         #{pid},#{pname},#{market_price},#{shop_price},#{pimage},#{is_hot},#{pdesc},#{category.cid}
+         #{pid},#{pname},#{market_price},#{shop_price},#{pimage},#{is_hot},#{pdesc},#{category.cid},#{pdate},#{pflag}
         )
     </insert>
 </mapper>

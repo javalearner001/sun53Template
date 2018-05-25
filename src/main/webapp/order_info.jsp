@@ -77,7 +77,7 @@
 
 					<tr class="active">
 						<td width="60" width="40%">
-							<img src="${pageContext.request.contextPath }/${orderItem.product.pimage}" width="70" height="60">
+							<img src="${orderItem.product.pimage}" width="70" height="60">
 						</td>
 						<td width="30%"><a target="_blank">${orderItem.product.pname}</a></td>
 						<td width="20%">￥${orderItem.product.shop_price}</td>

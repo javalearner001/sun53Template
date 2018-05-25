@@ -19,9 +19,9 @@ public class test {
             //创建一个Ftp对象
             FTPClient ftpClient=new FTPClient();
             //创建连接，端口
-            ftpClient.connect("120.79.59.251",21);
+            ftpClient.connect("192.168.62.128",21);
             //设置用户名，密码
-            ftpClient.login("ftpusers","456123z");
+            ftpClient.login("ftpuser","456123z");
             int replyCode = ftpClient.getReplyCode(); //是否成功登录服务器
 
             //3、读取本地文件
@@ -34,7 +34,7 @@ public class test {
             ftpClient.setFileType(FTPClient.BINARY_FILE_TYPE);
             //第一个参数：文件在远程服务器的名称
             //第二个参数：文件流
-            ftpClient.storeFile("hello.jpg", inputStream);
+            ftpClient.storeFile("hello1.jpg", inputStream);
             inputStream.close();
             //5、退出登录
             ftpClient.logout();

@@ -76,7 +76,7 @@
 						<tr class="active">
 							<td width="60" width="40%">
 								<input type="hidden" name="id" value="22">
-								<img src="${pageContext.request.contextPath }/${entry.value.product.pimage}" width="70" height="60">
+								<img src="${entry.value.product.pimage}" width="70" height="60">
 							</td>
 							<td width="30%">
 								<a target="_blank">${entry.value.product.pname}</a>
