@@ -193,18 +193,6 @@ font {
 					</div>
 
 					<div class="form-group">
-						<label for="code" class="col-sm-2 control-label">验证码</label>
-						<div class="col-sm-3">
-							<input type="text" class="form-control" id="code" name="code">
-
-						</div>
-						<div class="col-sm-2">
-							<img src="./image/captcha.jhtml" />
-						</div>
-
-					</div>
-
-					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-10">
 							<input type="submit" width="100" value="注册" name="submit"
 								style="background: url('./images/register.gif') no-repeat scroll 0 0 rgba(0, 0, 0, 0); height: 35px; width: 100px; color: white;">
