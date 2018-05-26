@@ -1,4 +1,5 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <HTML>
 <HEAD>
 <meta http-equiv="Content-Language" content="zh-cn">
@@ -49,18 +50,21 @@
 								<td width="7%" align="center">编辑</td>
 								<td width="7%" align="center">删除</td>
 							</tr>
+						<c:forEach items="${productList }" var="product" varStatus="vs">
 							<tr onmouseover="this.style.backgroundColor = 'white'"
 								onmouseout="this.style.backgroundColor = '#F5FAFE';">
 								<td style="CURSOR: hand; HEIGHT: 22px" align="center"
-									width="18%">1</td>
+									width="18%">
+									${vs.index}
+								</td>
 								<td style="CURSOR: hand; HEIGHT: 22px" align="center"
-									width="17%"><img width="40" height="45" src=""></td>
+									width="17%"><img width="40" height="45" src="${product.pimage}"></td>
 								<td style="CURSOR: hand; HEIGHT: 22px" align="center"
-									width="17%">电视机</td>
+									width="17%">${product.pname}</td>
 								<td style="CURSOR: hand; HEIGHT: 22px" align="center"
-									width="17%">3000</td>
+									width="17%">${product.shop_price}</td>
 								<td style="CURSOR: hand; HEIGHT: 22px" align="center"
-									width="17%">是</td>
+									width="17%">${product.is_hot}</td>
 								<td align="center" style="HEIGHT: 22px"><a
 									href="${ pageContext.request.contextPath }/admin/product/edit.jsp">
 										<img
@@ -68,11 +72,12 @@
 										border="0" style="CURSOR: hand">
 								</a></td>
 
-								<td align="center" style="HEIGHT: 22px"><a href="#"> <img
+								<td align="center" style="HEIGHT: 22px"><a href="${ pageContext.request.contextPath }/admin/deleteProduct?pid=${product.pid}"> <img
 										src="${pageContext.request.contextPath}/images/i_del.gif"
 										width="16" height="16" border="0" style="CURSOR: hand">
 								</a></td>
 							</tr>
+						</c:forEach>
 						</table>
 					</td>
 				</tr>

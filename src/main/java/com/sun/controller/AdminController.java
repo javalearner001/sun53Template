@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -124,5 +125,61 @@ public class AdminController {
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    /**
+     * 后台显示所有商品
+     */
+    @RequestMapping("/getProductList")
+    public void getProductList(HttpServletResponse response, HttpServletRequest request){
+        try {
+            List<Product> productList=adminService.getProductList();
+
+            request.setAttribute("productList",productList);
+            request.getRequestDispatcher("/admin/product/list.jsp").forward(request,response);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    @RequestMapping("/deleteProduct")
+    public void deleteProduct(HttpServletResponse response, HttpServletRequest request){
+        try {
+            //删除商品
+            String pid=request.getParameter("pid");
+            String result=adminService.deleteProduct(pid);
+
+            request.setAttribute("deleteResult",result);
+            request.getRequestDispatcher("/admin/product/deleteResult.jsp").forward(request,response);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+    @RequestMapping("/getCategoryList")
+    public void getCategoryList(HttpServletResponse response, HttpServletRequest request){
+        try {
+            //获得商品类别列表
+            List<Category> categoryList=productService.findAllCategory();
+            request.setAttribute("categoryList",categoryList);
+            request.getRequestDispatcher("/admin/category/list.jsp").forward(request,response);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    @RequestMapping("/deleteCategory")
+    public void deleteCategory(HttpServletResponse response, HttpServletRequest request){
+        try {
+            //删除商品
+            String cname=request.getParameter("cname");
+            String result=adminService.deleteCategory(cname);
+
+            request.setAttribute("deleteResult",result);
+            request.getRequestDispatcher("/admin/product/deleteResult.jsp").forward(request,response);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 }

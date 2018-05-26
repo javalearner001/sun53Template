@@ -50,6 +50,7 @@ public class FtpUtil {
 				ftp.disconnect();
 				return result;
 			}
+			ftp.enterLocalPassiveMode();
 			//切换到上传目录
 			if (!ftp.changeWorkingDirectory(basePath+filePath)) {
 				//如果目录不存在创建目录
